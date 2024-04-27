@@ -24,16 +24,12 @@
 
 body {
   margin: 0;
-  padding: 5px;
+  padding: 1rem;
   font-family: var(--font-family-main);
   display: flex;
   flex-direction: column;
   max-width: 800px;
   margin: auto;
-}
-
-ul {
-  padding-left: 0;
 }
 
 header {
@@ -52,6 +48,7 @@ header nav {
   justify-content: space-between;
   align-items: center;
   gap: 1rem;
+  padding-left: 0;
 }
 
 .menu li {
