@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Google tag (gtag.js) -->
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=G-8R85PXVGD2"
+    ></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+
+      gtag("config", "G-8R85PXVGD2");
+    </script>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+      Peezer.io | Automatically measure the duration of your pee streams
+    </title>
+    <link rel="icon" type="image/x-icon" href="assets/images/favicon.ico" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="manifest" href="/manifest.json" />
+  </head>
+  <body>
+    <!-- Popup container for adding to home screen -->
+    <div id="installPopup" style="display: none">
+      <div class="popupContent">
+        <button
+          id="btnClose"
+          style="
+            position: absolute;
+            right: 20px;
+            top: 10px;
+            border: none;
+            background: none;
+            font-size: 24px;
+            cursor: pointer;
+          "
+        >
+          &times;
+        </button>
+        <p>
+          Add Peezer.io to your home screen for easy access and a full app
+          experience.
+        </p>
+        <button id="btnAdd">Add</button>
+      </div>
+    </div>
+
+    <header>
+      <nav>
+        <a href="/"
+          ><img src="assets/images/logo.png" class="logo" alt="logo"
+        /></a>
+        <ul class="menu">
+          <li><a href="howItWorks.html">How it Works</a></li>
+
+          <li><a href="privacyPolicy.html">Privacy Policy</a></li>
+        </ul>
+      </nav>
+    </header>
+    <div class="main-wrapper">
+      <h1 class="landing">
+        Peezer.io - Measure the duration of your
+        <span style="color: gold; text-transform: uppercase">pee</span> stream
+        in seconds, literally!
+      </h1>
+      <div id="errorMessage" style="color: red; display: none"></div>
+      <button id="recordButton" onclick="toggleRecording()">Record</button>
+      <canvas
+        id="audioCanvas"
+        width="800"
+        height="250"
+        style="display: none"
+      ></canvas>
+      <div id="recordingAnimation" style="display: none">
+        <div class="sound-wave">
+          <div class="bar"></div>
+          <div class="bar"></div>
+          <div class="bar"></div>
+          <div class="bar"></div>
+          <div class="bar"></div>
+        </div>
+
+        <p>Recording...</p>
+      </div>
+      <div id="result"></div>
+      <button id="loadTableButton">Load Duration Data</button>
+      <canvas
+        id="durationGraph"
+        width="600"
+        height="400"
+        style="display: none"
+      ></canvas>
+      <table id="durationTable" style="display: none">
+        <thead>
+          <tr>
+            <th>Duration (seconds)</th>
+            <th>Date</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- Data rows will be added here dynamically -->
+        </tbody>
+      </table>
+    </div>
+
+    <script src="peeStreamAnalyzer.js"></script>
+  </body>
+</html>

@@ -1,0 +1,22 @@
+{
+    "name": "Peezer.io",
+    "short_name": "Peezer",
+    "start_url": ".",
+    "display": "standalone",
+    "background_color": "#ffffff",
+    "description": "Measure the duration of your pee stream in seconds, literally!",
+    "icons": [
+      {
+        "src": "assets/images/logo-192x192.png",
+        "sizes": "192x192",
+        "type": "image/png"
+      },
+      {
+        "src": "icons/logo-512x512.png",
+        "sizes": "512x512",
+        "type": "image/png"
+      }
+    ],
+    "theme_color": "#576574"
+  }
+  

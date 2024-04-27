@@ -1,0 +1,309 @@
+:root {
+  /* Color scheme */
+  --primary-color: #000;
+  --secondary-color: gold;
+  --hover-color: #222;
+  --text-color: white;
+  --background-light: #f2f2f2;
+  --background-medium: #f9f9f9;
+  --border-color: #dddddd;
+
+  /* Font styling */
+  --font-family-main: "Rajdhani", sans-serif;
+  --font-size-large: 1.2rem;
+  --font-size-button: 0.8rem;
+
+  /* Spacing and sizing */
+  --default-padding: 10px 20px;
+  --default-radius: 5px;
+
+  /* Animation timing */
+  --animation-duration: 0.8s;
+  --animation-timing: ease-in-out;
+}
+
+body {
+  margin: 0;
+  padding: 5px;
+  font-family: var(--font-family-main);
+  display: flex;
+  flex-direction: column;
+  max-width: 800px;
+  margin: auto;
+}
+
+ul {
+  padding-left: 0;
+}
+
+header {
+  margin-bottom: 2rem;
+  width: 100%;
+}
+
+header nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.menu {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+}
+
+.menu li {
+  list-style: none;
+}
+
+header nav a {
+  text-decoration: none;
+  font-size: var(--font-size-large);
+  color: var(--primary-color);
+}
+
+.logo {
+  max-width: 100px;
+}
+
+.landing {
+  letter-spacing: 0.7px;
+  text-align: center;
+}
+
+canvas {
+  width: 100%;
+  max-width: 800px;
+}
+
+img {
+  max-width: 100%;
+  margin: auto;
+}
+
+#recordButton {
+  width: 100px;
+  height: 100px;
+  background-color: red;
+  border-radius: 50%;
+  border: none;
+  color: var(--text-color);
+  font-size: var(--font-size-button);
+  cursor: pointer;
+  font-family: var(--font-family-main);
+  text-transform: uppercase;
+  font-weight: 600;
+  letter-spacing: 0.6px;
+}
+
+.main-wrapper,
+#result {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+}
+
+#loadTableButton {
+  background-color: var(--primary-color);
+  color: var(--text-color);
+  border: none;
+  padding: var(--default-padding);
+  font-size: var(--font-size-button);
+  cursor: pointer;
+  border-radius: var(--default-radius);
+  transition: background-color 0.3s;
+  font-family: var(--font-family-main);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-weight: bolder;
+}
+
+#loadTableButton:hover {
+  background-color: var(--hover-color);
+}
+
+.duration {
+  color: var(--secondary-color);
+  font-size: 2rem;
+  font-weight: bold;
+}
+
+.volume {
+  color: red;
+  font-size: 2rem;
+  font-weight: bold;
+}
+
+.heineken {
+  max-width: 60px;
+  position: relative;
+  top: 30px;
+  left: -15px;
+}
+
+#durationTable {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+#durationTable th,
+#durationTable td {
+  border: 1px solid var(--border-color);
+  text-align: left;
+  padding: 8px;
+}
+
+#durationTable th {
+  background-color: var(--background-light);
+}
+
+#durationTable tr:nth-child(even) {
+  background-color: var(--background-medium);
+}
+
+.sound-wave {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  height: 50px;
+  width: 100%;
+}
+
+.bar {
+  width: 5px;
+  height: 10px;
+  background-color: var(--secondary-color);
+  animation: pulsate var(--animation-duration) var(--animation-timing) infinite;
+  border-radius: 5px;
+}
+
+.bar:nth-child(1) {
+  animation-delay: 0s;
+}
+.bar:nth-child(2) {
+  animation-delay: 0.1s;
+}
+.bar:nth-child(3) {
+  animation-delay: 0.2s;
+}
+.bar:nth-child(4) {
+  animation-delay: 0.3s;
+}
+.bar:nth-child(5) {
+  animation-delay: 0.4s;
+}
+
+@keyframes pulsate {
+  0%,
+  100% {
+    transform: scaleY(1);
+  }
+  50% {
+    transform: scaleY(2);
+  }
+}
+
+@media screen and (max-width: 500px) {
+  header nav {
+    flex-direction: column;
+  }
+}
+
+#installPopup {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background: white;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  z-index: 1000; /* Ensures the popup appears above other content */
+  display: none; /* Hidden by default */
+  text-align: center;
+}
+
+.popupContent {
+  padding: 1rem;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+#installPopup p {
+  color: black;
+  font-size: 16px;
+  margin: 10px 0;
+}
+
+#btnAdd {
+  font-family: var(--font-family-main);
+  background-color: gold;
+  color: black;
+  border: none;
+  padding: 10px 20px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 5px;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+#btnAdd:hover {
+  background-color: red;
+  color: white;
+}
+
+#btnClose {
+  color: black; /* Match the text color for consistency */
+  background: none;
+  border: none;
+  font-size: 24px; /* Large enough to be easily clickable */
+  cursor: pointer;
+  opacity: 0.6;
+}
+
+#btnClose:hover {
+  opacity: 1; /* Increase visibility on hover for better interaction feedback */
+}
+
+.ios-popup {
+  padding: 20px;
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  position: fixed;
+  top: 50%; /* Center vertically in the middle of the screen */
+  left: 50%; /* Center horizontally */
+  transform: translate(
+    -50%,
+    -50%
+  ); /* Adjust the position to truly center the element */
+  z-index: 1000;
+  width: 80%; /* Responsive width */
+  max-width: 500px; /* Maximum width to ensure it fits on smaller screens */
+  box-sizing: border-box;
+  text-align: center;
+  margin: 0; /* Remove margin to avoid any offset issues */
+}
+
+.close-button {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  border: none;
+  background: none;
+  color: #333;
+  font-size: 24px;
+  cursor: pointer;
+  border-radius: 0;
+}
+
+.close-button:hover {
+  color: #666;
+}
