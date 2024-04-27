@@ -1,23 +1,3 @@
-//add instructions - DONE
-//duration and waveform UI -DONE
-//make it shareble in image
-//save only duration to the database - ???
-//local storage - DONE
-//grafikon - DONE
-//add analythics - DONE
-//add privacy notrice regarding audio recorsing -DONE
-//add header -DONE
-//DodaJ KOLICINU - DONE
-//Move github
-//load duration data button only if somewthing in local storage. -DONE
-//load duration data load most recent recording data ???
-//PWA - DONE
-//connect with friends via code option
-//push notifikacije when friends use peezer
-//flasa heinekena promeni - DONE
-//make it a native app
-//add sounds to pospesis pisanje- record stops music
-
 let audioContext;
 let mediaRecorder;
 let audioChunks = [];
