@@ -1,14 +1,15 @@
 # Peezer.io
 
-Welcome to Peezer.io, an innovative web app designed to measure the duration and approximate volume of urine streams using your smartphone's microphone. Our app provides a convenient, private way to monitor urinary health and maintain a record that can be useful for medical purposes or personal interest.
+Peezer.io is a web application that allows users to measure the duration of their pee streams using the microphone on their device. This unique utility leverages the browser's audio capabilities to record and analyze audio in real-time, calculating the duration of the longest continuous stream. The app is designed with privacy in mind, ensuring that all audio processing is performed locally on the user's device.
 
 ## Features
 
-- **Urine Stream Duration**: Measures how long your pee lasts using the sound of urine hitting water.
-- **Volume Estimation**: Estimates the volume of your urine stream based on the duration and sound characteristics.
-- **Privacy First**: Completely anonymous use, no personal data is stored or required.
-- **Health Tracking**: Keep track of urinary trends which might be indicative of health issues.
-- **Ease of Use**: Simple interface, start and stop with just one tap.
+- **Real-Time Audio Analysis**: Record pee streams and analyze them in real-time to determine the duration.
+- **Privacy-Focused**: No audio data is ever stored or sent over the network. All analyses are done locally.
+- **Add to Home Screen**: Users can add Peezer.io to their home screen on mobile devices for an app-like experience.
+- **Local Storage of Data**: Durations and timestamps are saved locally, allowing users to track changes over time.
+- **Interactive Graphs**: View historical data through responsive, interactive graphs.
+- **Responsive Design**: Fully responsive web design that works on mobiles, tablets, and desktops.
 
 ## Getting Started
 
@@ -28,12 +29,12 @@ Peezer.io uses the microphone on your smartphone to detect the sound of urine hi
 
 Your privacy is important to us:
 
-- Peezer.io does not store any recordings. All processing is done in real-time.
+- Peezer.io does not store any recordings. All processing is done in real time.
 - No personal data is collected or required to use the app.
 
 ## Contributing
 
-We welcome contributions from the community, whether it's in the form of feature requests, bug reports, or code contributions. Please visit our [GitHub repository](https://github.com/peezer-io) to see how you can contribute.
+We welcome contributions from the community, whether it's in the form of feature requests, bug reports, or code contributions.
 
 ## License
 
@@ -41,6 +42,6 @@ Peezer.io is open source and available under the MIT License. See the LICENSE fi
 
 ## Contact
 
-For support or to provide feedback, please email us at support@peezer.io.
+For support or to provide feedback, please email us at contact@milosdraskovic.com.
 
 Thank you for using Peezer.io!
