@@ -214,12 +214,14 @@ document.addEventListener("DOMContentLoaded", function () {
   function sortDurationData() {
     durationData.sort((a, b) => b.duration - a.duration);
     sortedByDuration = true;
+    canvas.style.display = "none";
     renderTable();
   }
 
   function sortTimeData() {
     durationData.sort((a, b) => new Date(a.dateTime) - new Date(b.dateTime));
     sortedByDuration = false;
+    canvas.style.display = "block";
     renderTable();
   }
 
