@@ -222,7 +222,6 @@ document.addEventListener("DOMContentLoaded", function () {
   function sortTimeData() {
     durationData.sort((a, b) => new Date(a.dateTime) - new Date(b.dateTime));
     sortedByDuration = false;
-    canvasDuration.style.display = "block";
     renderTable();
   }
 
@@ -249,8 +248,9 @@ document.addEventListener("DOMContentLoaded", function () {
         row.classList.add("highlight");
       }
     });
-
-    drawGraph(durationData); // Update the graph if necessary
+    if (!sortedByDuration) {
+      drawGraph(durationData); // Update the graph if necessary
+    }
   }
 
   loadTableButton.addEventListener("click", function () {
@@ -259,7 +259,7 @@ document.addEventListener("DOMContentLoaded", function () {
     sortDurationButton.style.display = "inline-block";
     durationTable.style.display = "table";
     loadTableButton.style.display = "none";
-    canvasDuration.style.display = "none";
+
     durationDataInfo.style.display = "block";
   });
 
@@ -300,9 +300,9 @@ function drawGraph(data) {
   });
 
   ctx.lineTo(margin + graphWidth, canvas.height - margin);
-  ctx.fillStyle = "#F2CB91"; // Graph fill color
+  ctx.fillStyle = "#fff"; // Graph fill color
   ctx.fill();
-  ctx.strokeStyle = "#576574"; // Graph line color
+  ctx.strokeStyle = "#000"; // Graph line color
   ctx.stroke();
 
   // Draw red dots at data points on top of the line
@@ -311,9 +311,9 @@ function drawGraph(data) {
     const y =
       canvas.height - margin - (item.duration / maxDuration) * graphHeight;
 
-    ctx.fillStyle = "red"; // Set fill color for the dot
+    ctx.fillStyle = "gold"; // Set fill color for the dot
     ctx.beginPath(); // Begin a new path for the dot
-    ctx.arc(x, y, 3, 0, Math.PI * 2); // Draw a circle for the dot
+    ctx.arc(x, y, 6, 0, Math.PI * 2); // Draw a circle for the dot
     ctx.fill(); // Fill the dot with red color
   });
 

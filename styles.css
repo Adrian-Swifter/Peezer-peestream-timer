@@ -20,6 +20,14 @@
   /* Animation timing */
   --animation-duration: 0.8s;
   --animation-timing: ease-in-out;
+
+  font-size: 16px;
+}
+
+*,
+*:before,
+*:after {
+  box-sizing: border-box;
 }
 
 body {
@@ -336,4 +344,9 @@ img {
   color: white;
   font-family: var(--font-family-main);
   padding: 5px;
+  cursor: pointer;
+}
+
+#durationData {
+  width: 100%;
 }
