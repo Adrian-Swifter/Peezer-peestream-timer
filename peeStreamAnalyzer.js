@@ -202,6 +202,7 @@ function createAudioElement(blob, message) {
 document.addEventListener("DOMContentLoaded", function () {
   const sortTimeButton = document.getElementById("sortTimeButton");
   const sortDurationButton = document.getElementById("sortDurationButton");
+  const canvasDuration = document.getElementById("durationGraph");
 
   if (!localStorage.getItem("durations")) {
     loadTableButton.style.display = "none";
@@ -214,14 +215,14 @@ document.addEventListener("DOMContentLoaded", function () {
   function sortDurationData() {
     durationData.sort((a, b) => b.duration - a.duration);
     sortedByDuration = true;
-    canvas.style.display = "none";
+    canvasDuration.style.display = "none";
     renderTable();
   }
 
   function sortTimeData() {
     durationData.sort((a, b) => new Date(a.dateTime) - new Date(b.dateTime));
     sortedByDuration = false;
-    canvas.style.display = "block";
+    canvasDuration.style.display = "block";
     renderTable();
   }
 
@@ -258,6 +259,7 @@ document.addEventListener("DOMContentLoaded", function () {
     sortDurationButton.style.display = "inline-block";
     durationTable.style.display = "table";
     loadTableButton.style.display = "none";
+    canvasDuration.style.display = "none";
     durationDataInfo.style.display = "block";
   });
 
