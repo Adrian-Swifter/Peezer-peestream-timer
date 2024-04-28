@@ -350,3 +350,45 @@ img {
 #durationData {
   width: 100%;
 }
+
+.share-buttons {
+  margin: 2rem 0;
+}
+
+.share-buttons button,
+.share-buttons a {
+  background: #ffffff;
+  border: none;
+  border-radius: 10px;
+  color: #555;
+  cursor: pointer;
+  font-size: 16px;
+  padding: 10px 20px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  margin: 5px;
+  display: inline-block; /* Change to inline-block if you are making them visible by default */
+}
+
+/* WhatsApp Button Styling */
+#shareOnWhatsApp {
+  color: #25d366; /* WhatsApp brand color */
+}
+
+/* Viber Button Styling */
+#shareOnViber {
+  color: #665cac; /* Viber brand color */
+}
+
+/* Telegram Button Styling */
+#shareOnTelegram {
+  color: #0088cc; /* Telegram brand color */
+}
+
+.share-buttons button:hover,
+.share-buttons a:hover {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.share-buttons button i {
+  margin-right: 8px; /* Adding space between the icon and the text */
+}

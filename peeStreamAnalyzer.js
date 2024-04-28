@@ -59,6 +59,43 @@ async function startRecording(as) {
       )} </span> of <img src="assets/images/heineken.png" class="heineken" alt="heineken"/>`;
       createAudioElement(audioBlob, message);
       canvas.style.display = "block";
+
+      const shareOnWhatsApp = document.getElementById("shareOnWhatsApp");
+      const shareOnTelegram = document.getElementById("shareOnTelegram");
+      const shareOnViber = document.getElementById("shareOnViber");
+      const shareButtons = document.getElementsByClassName("share-buttons")[0];
+
+      shareButtons.style.display = "block";
+
+      shareOnWhatsApp.addEventListener("click", function () {
+        let message =
+          "My longest continuous pee stream was " +
+          longestDuration.toFixed(2) +
+          " seconds! Try it yourself at https://peezer.io.";
+        let whatsappUrl = "https://wa.me/?text=" + encodeURIComponent(message);
+        window.open(whatsappUrl, "_blank");
+      });
+
+      shareOnTelegram.addEventListener("click", function () {
+        let message =
+          "My longest continuous pee stream was " +
+          longestDuration.toFixed(2) +
+          " seconds! Try it yourself at https://peezer.io.";
+        let telegramUrl =
+          "https://t.me/share/url?url=https%3A//peezer.io&text=" +
+          encodeURIComponent(message);
+        window.open(telegramUrl, "_blank");
+      });
+
+      shareOnViber.setAttribute(
+        "href",
+        "viber://forward?text=" +
+          encodeURIComponent(
+            "My longest continuous pee stream was " +
+              longestDuration.toFixed(2) +
+              " seconds! Try it yourself at https://peezer.io."
+          )
+      );
     });
 
     as.getTracks().forEach((track) => track.stop()); // Stop the media tracks
