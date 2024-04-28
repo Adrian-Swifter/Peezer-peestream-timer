@@ -68,7 +68,7 @@
         </ul>
       </nav>
     </header>
-    <div class="main-wrapper">
+    <main class="main-wrapper">
       <h1 class="landing">
         Peezer.io - Measure the duration of your
         <span style="color: gold; text-transform: uppercase">pee</span> stream
@@ -97,24 +97,32 @@
       </div>
       <div id="result"></div>
       <button id="loadTableButton">Load Duration Data</button>
-      <canvas
-        id="durationGraph"
-        width="600"
-        height="400"
-        style="display: none"
-      ></canvas>
-      <table id="durationTable" style="display: none">
-        <thead>
-          <tr>
-            <th>Duration (seconds)</th>
-            <th>Date</th>
-          </tr>
-        </thead>
-        <tbody>
-          <!-- Data rows will be added here dynamically -->
-        </tbody>
-      </table>
-    </div>
+      <section id="durationData">
+        <canvas
+          id="durationGraph"
+          width="600"
+          height="400"
+          style="display: none"
+        ></canvas>
+        <div class="table-controls">
+          <button id="sortDurationButton" class="filter-btn">
+            Sort by Duration
+          </button>
+          <button id="sortTimeButton" class="filter-btn">Sort by Time</button>
+        </div>
+        <table id="durationTable" style="display: none">
+          <thead>
+            <tr>
+              <th>Duration (seconds)</th>
+              <th>Date</th>
+            </tr>
+          </thead>
+          <tbody>
+            <!-- Data rows will be added here dynamically -->
+          </tbody>
+        </table>
+      </section>
+    </main>
 
     <script src="peeStreamAnalyzer.js"></script>
   </body>

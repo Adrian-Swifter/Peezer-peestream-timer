@@ -217,8 +217,8 @@ img {
   width: 100%;
   background: white;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  z-index: 1000; /* Ensures the popup appears above other content */
-  display: none; /* Hidden by default */
+  z-index: 1000;
+  display: none;
   text-align: center;
 }
 
@@ -257,16 +257,16 @@ img {
 }
 
 #btnClose {
-  color: black; /* Match the text color for consistency */
+  color: black;
   background: none;
   border: none;
-  font-size: 24px; /* Large enough to be easily clickable */
+  font-size: 24px;
   cursor: pointer;
   opacity: 0.6;
 }
 
 #btnClose:hover {
-  opacity: 1; /* Increase visibility on hover for better interaction feedback */
+  opacity: 1;
 }
 
 .ios-popup {
@@ -275,18 +275,15 @@ img {
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   position: fixed;
-  top: 50%; /* Center vertically in the middle of the screen */
-  left: 50%; /* Center horizontally */
-  transform: translate(
-    -50%,
-    -50%
-  ); /* Adjust the position to truly center the element */
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   z-index: 1000;
-  width: 80%; /* Responsive width */
-  max-width: 500px; /* Maximum width to ensure it fits on smaller screens */
+  width: 80%;
+  max-width: 500px;
   box-sizing: border-box;
   text-align: center;
-  margin: 0; /* Remove margin to avoid any offset issues */
+  margin: 0;
 }
 
 .close-button {
@@ -303,4 +300,40 @@ img {
 
 .close-button:hover {
   color: #666;
+}
+
+.highlight {
+  color: black;
+  font-weight: bold;
+  position: relative;
+}
+
+.highlight::after {
+  content: "";
+  display: block;
+  background-image: url("assets/images/first-place.png");
+  background-size: cover;
+  width: 30px;
+  height: 30px;
+  position: absolute;
+  right: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.table-controls {
+  text-align: center;
+  margin-bottom: 10px;
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.filter-btn {
+  display: none;
+  border: none;
+  background-color: #000;
+  color: white;
+  font-family: var(--font-family-main);
+  padding: 5px;
 }

@@ -12,13 +12,17 @@ const resultDiv = document.getElementById("result");
 const canvas = document.getElementById("audioCanvas");
 const recordingAnimation = document.getElementById("recordingAnimation");
 const durationTable = document.getElementById("durationTable");
+const durationDataInfo = document.getElementById("durationData");
 const landing = document.getElementsByClassName("landing")[0];
 const ctx = canvas.getContext("2d");
 const width = canvas.width;
 const height = canvas.height;
 
 async function startRecording(as) {
+  const loadTableButton = document.getElementById("loadTableButton");
   canvas.style.display = "none";
+  durationDataInfo.style.display = "none";
+  loadTableButton.style.display = "block";
   // If microphone access was successful, clear any existing error messages
   updateErrorMessage("");
   audioContext = new AudioContext();
@@ -164,7 +168,7 @@ function analyzeAndLogLongestStream(data, sampleRate, threshold) {
   durationData.push({ dateTime, duration: longestDuration });
   localStorage.setItem("durations", JSON.stringify(durationData));
 
-  recordButton.textContent = "Record";
+  recordButton.textContent = "Record Again";
   recordButton.style.backgroundColor = "red";
   recordButton.disabled = false;
   return longestDuration;
@@ -196,24 +200,36 @@ function createAudioElement(blob, message) {
 }
 
 document.addEventListener("DOMContentLoaded", function () {
-  const loadTableButton = document.getElementById("loadTableButton");
+  const sortTimeButton = document.getElementById("sortTimeButton");
+  const sortDurationButton = document.getElementById("sortDurationButton");
+
   if (!localStorage.getItem("durations")) {
     loadTableButton.style.display = "none";
   }
-  // Load and draw the graph as soon as the page loads
-  const durationData = JSON.parse(localStorage.getItem("durations")) || [];
 
-  // Attach the event listener to the loadTableButton for loading the table
-  loadTableButton.addEventListener("click", function () {
-    durationTable.style.display = "table";
+  // Parse and sort data by duration initially
+  let durationData = JSON.parse(localStorage.getItem("durations")) || [];
+  let sortedByDuration = true; // Initial state is sorted by duration
+
+  function sortDurationData() {
+    durationData.sort((a, b) => b.duration - a.duration);
+    sortedByDuration = true;
+    renderTable();
+  }
+
+  function sortTimeData() {
+    durationData.sort((a, b) => new Date(a.dateTime) - new Date(b.dateTime));
+    sortedByDuration = false;
+    renderTable();
+  }
+
+  function renderTable() {
     // Reference to the table's tbody
     const tableBody = durationTable.getElementsByTagName("tbody")[0];
+    tableBody.innerHTML = ""; // Clear the table body
 
-    // Clear the table body to avoid duplicate entries when button is clicked
-    tableBody.innerHTML = "";
-
-    // Iterate over durationData to create and append table rows and cells
-    durationData.forEach((item) => {
+    // Iterate over sorted durationData to create and append table rows and cells
+    durationData.forEach((item, index) => {
       const row = document.createElement("tr");
       const durationCell = document.createElement("td");
       durationCell.textContent = item.duration.toFixed(2);
@@ -224,15 +240,28 @@ document.addEventListener("DOMContentLoaded", function () {
       row.appendChild(durationCell);
       row.appendChild(dateCell);
       tableBody.appendChild(row);
+
+      // Highlight the top duration
+      if (sortedByDuration && index === 0) {
+        row.classList.add("highlight");
+      }
     });
 
-    drawGraph(durationData);
-    // Optionally, hide the load button after fetching the data
-    loadTableButton.style.display = "none";
-  });
-});
+    drawGraph(durationData); // Update the graph if necessary
+  }
 
-// The drawGraph function and other functions remain unchanged
+  loadTableButton.addEventListener("click", function () {
+    sortDurationData(); // Default sort by duration
+    sortTimeButton.style.display = "inline-block";
+    sortDurationButton.style.display = "inline-block";
+    durationTable.style.display = "table";
+    loadTableButton.style.display = "none";
+    durationDataInfo.style.display = "block";
+  });
+
+  sortTimeButton.addEventListener("click", sortTimeData);
+  sortDurationButton.addEventListener("click", sortDurationData);
+});
 
 function drawGraph(data) {
   const canvas = document.getElementById("durationGraph");
