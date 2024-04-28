@@ -19,10 +19,9 @@ const width = canvas.width;
 const height = canvas.height;
 
 async function startRecording(as) {
-  const loadTableButton = document.getElementById("loadTableButton");
   canvas.style.display = "none";
   durationDataInfo.style.display = "none";
-  loadTableButton.style.display = "block";
+
   // If microphone access was successful, clear any existing error messages
   updateErrorMessage("");
   audioContext = new AudioContext();
