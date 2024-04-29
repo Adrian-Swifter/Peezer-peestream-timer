@@ -22,7 +22,6 @@ async function startRecording(as) {
   canvas.style.display = "none";
   durationDataInfo.style.display = "none";
 
-  // If microphone access was successful, clear any existing error messages
   updateErrorMessage("");
   audioContext = new AudioContext();
   mediaRecorder = new MediaRecorder(as);
@@ -33,21 +32,20 @@ async function startRecording(as) {
 
   mediaRecorder.onstop = async function () {
     const audioBlob = new Blob(audioChunks, { type: "audio/aac" });
-    audioChunks = []; // Clear the chunks for the next recording
+    audioChunks = [];
     const arrayBuffer = await audioBlob.arrayBuffer();
 
     audioContext.decodeAudioData(arrayBuffer, function (buffer) {
       const audioBuffer = buffer.getChannelData(0);
-      const threshold = 0.006; // Set threshold here
+      const threshold = 0.006;
 
-      visualizeAudio(audioBuffer); // Visualize the audio data
+      visualizeAudio(audioBuffer);
       const longestDuration = analyzeAndLogLongestStream(
         audioBuffer,
         audioContext.sampleRate,
         threshold
       );
 
-      // Call createAudioElement with the audio blob and the message
       const message = `The longest continuous pee stream is <span class="duration">${longestDuration.toFixed(
         2
       )}</span> seconds long. You produced approximately <span class="volume">${calculateUrineVolume(
@@ -98,7 +96,7 @@ async function startRecording(as) {
       );
     });
 
-    as.getTracks().forEach((track) => track.stop()); // Stop the media tracks
+    as.getTracks().forEach((track) => track.stop());
   };
 
   mediaRecorder.start();
@@ -116,7 +114,7 @@ async function startRecording(as) {
 }
 
 function updateErrorMessage(message) {
-  const errorMessageDiv = document.getElementById("errorMessage"); // Make sure to add this element to your HTML
+  const errorMessageDiv = document.getElementById("errorMessage");
   errorMessageDiv.textContent = message;
   errorMessageDiv.style.display = message ? "block" : "none";
 }
@@ -128,7 +126,7 @@ function stopRecording() {
   recordButton.textContent = "Calculating...";
   recordButton.disabled = true;
   isRecording = false;
-  recordingAnimation.style.display = "none"; // Hide recording animation
+  recordingAnimation.style.display = "none";
 }
 
 async function toggleRecording() {
@@ -137,26 +135,24 @@ async function toggleRecording() {
       // Attempt to get audio input from the user's microphone
       audioStream = await navigator.mediaDevices.getUserMedia({ audio: true });
     } catch (err) {
-      // Log the error to the console
       console.error("An error occurred: ", err);
 
-      // Display an error message to the user using HTML
       updateErrorMessage(
         "Error: Please ensure your microphone is connected and not disabled."
       );
-      return; // Early return to stop further execution
+      return;
     }
     startRecording(audioStream);
     landing.style.display = "none";
-    recordingAnimation.style.display = "block"; // Show recording animation
+    recordingAnimation.style.display = "block";
   } else {
     stopRecording();
-    recordingAnimation.style.display = "none"; // Hide recording animation
+    recordingAnimation.style.display = "none";
   }
 }
 
 function visualizeAudio(data) {
-  ctx.clearRect(0, 0, width, height); // Clear the canvas first
+  ctx.clearRect(0, 0, width, height);
   ctx.beginPath();
   ctx.moveTo(0, height / 2);
 
@@ -195,10 +191,9 @@ function analyzeAndLogLongestStream(data, sampleRate, threshold) {
       }
     }
   }
-  longestStream = Math.max(longestStream, currentStream); // Ensure the last segment is considered
+  longestStream = Math.max(longestStream, currentStream);
   const longestDuration = longestStream / sampleRate;
 
-  // Store the duration along with date and time in local storage
   const dateTime = new Date().toISOString();
   const durationData = JSON.parse(localStorage.getItem("durations")) || [];
   durationData.push({ dateTime, duration: longestDuration });
@@ -211,15 +206,13 @@ function analyzeAndLogLongestStream(data, sampleRate, threshold) {
 }
 
 function createAudioElement(blob, message) {
-  // Clear any existing content in resultDiv
   resultDiv.innerHTML = "";
 
-  // Create the audio element and set its source to the blob URL
   const url = URL.createObjectURL(blob);
   const audio = new Audio();
   audio.src = url;
   audio.controls = true;
-  audio.playsInline = true; // Add playsInline for iOS devices
+  audio.playsInline = true;
 
   // Append only if new Audio was created
   if (!audio.id) {
@@ -227,11 +220,10 @@ function createAudioElement(blob, message) {
     resultDiv.appendChild(audio);
   }
 
-  // Check if a message was provided, and if so, create and append a text element for it
   if (message) {
     const textElement = document.createElement("p");
     textElement.innerHTML = message;
-    resultDiv.appendChild(textElement); // Append the message after the audio controls
+    resultDiv.appendChild(textElement);
   }
 }
 
@@ -246,7 +238,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // Parse and sort data by duration initially
   let durationData = JSON.parse(localStorage.getItem("durations")) || [];
-  let sortedByDuration = true; // Initial state is sorted by duration
+  let sortedByDuration = true; //
 
   function sortDurationData() {
     durationData.sort((a, b) => b.duration - a.duration);
@@ -262,9 +254,8 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   function renderTable() {
-    // Reference to the table's tbody
     const tableBody = durationTable.getElementsByTagName("tbody")[0];
-    tableBody.innerHTML = ""; // Clear the table body
+    tableBody.innerHTML = "";
 
     // Iterate over sorted durationData to create and append table rows and cells
     durationData.forEach((item, index) => {
@@ -279,18 +270,17 @@ document.addEventListener("DOMContentLoaded", function () {
       row.appendChild(dateCell);
       tableBody.appendChild(row);
 
-      // Highlight the top duration
       if (sortedByDuration && index === 0) {
         row.classList.add("highlight");
       }
     });
     if (!sortedByDuration) {
-      drawGraph(durationData); // Update the graph if necessary
+      drawGraph(durationData);
     }
   }
 
   loadTableButton.addEventListener("click", function () {
-    sortDurationData(); // Default sort by duration
+    sortDurationData();
     sortTimeButton.style.display = "inline-block";
     sortDurationButton.style.display = "inline-block";
     durationTable.style.display = "table";
@@ -312,15 +302,13 @@ function drawGraph(data) {
   const graphWidth = canvas.width - 2 * margin;
   const graphHeight = canvas.height - 2 * margin;
 
-  // Clear canvas
   ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-  // Draw axes
   ctx.beginPath();
   ctx.moveTo(margin, margin);
   ctx.lineTo(margin, canvas.height - margin);
   ctx.lineTo(canvas.width - margin, canvas.height - margin);
-  ctx.strokeStyle = "black"; // Stroke color for the axes
+  ctx.strokeStyle = "black";
   ctx.stroke();
 
   // Draw data as line segments
@@ -336,39 +324,37 @@ function drawGraph(data) {
   });
 
   ctx.lineTo(margin + graphWidth, canvas.height - margin);
-  ctx.fillStyle = "#fff"; // Graph fill color
+  ctx.fillStyle = "#fff";
   ctx.fill();
-  ctx.strokeStyle = "#000"; // Graph line color
+  ctx.strokeStyle = "#000";
   ctx.stroke();
 
-  // Draw red dots at data points on top of the line
+  // Draw red dots at data points
   data.forEach((item, index) => {
     const x = margin + (index / data.length) * graphWidth;
     const y =
       canvas.height - margin - (item.duration / maxDuration) * graphHeight;
 
-    ctx.fillStyle = "gold"; // Set fill color for the dot
-    ctx.beginPath(); // Begin a new path for the dot
-    ctx.arc(x, y, 6, 0, Math.PI * 2); // Draw a circle for the dot
-    ctx.fill(); // Fill the dot with red color
+    ctx.fillStyle = "gold";
+    ctx.beginPath();
+    ctx.arc(x, y, 6, 0, Math.PI * 2);
+    ctx.fill();
   });
 
   // Reset styles before drawing text
-  ctx.fillStyle = "black"; // Text color for the labels
-  ctx.font = "12px Arial"; // Set the font size for the labels
+  ctx.fillStyle = "black";
+  ctx.font = "12px Arial";
 
-  // Labels for Y axis (Duration)
-  ctx.textAlign = "right"; // Align text to the right for Y axis labels
-  ctx.textBaseline = "middle"; // Center text vertically
+  ctx.textAlign = "right";
+  ctx.textBaseline = "middle";
   for (let i = 0; i <= maxDuration; i += maxDuration / 10) {
     const y = canvas.height - margin - (i / maxDuration) * graphHeight;
     ctx.fillText(`${i.toFixed(2)}s`, margin - 10, y);
   }
 
-  // Labels for X axis (Date)
-  ctx.textAlign = "center"; // Center text horizontally for X axis labels
-  ctx.textBaseline = "top"; // Align text to the top for X axis labels
-  const labelFrequency = Math.ceil(data.length / 10); // Adjust to show more or fewer labels
+  ctx.textAlign = "center";
+  ctx.textBaseline = "top";
+  const labelFrequency = Math.ceil(data.length / 10);
   data.forEach((item, index) => {
     if (index % labelFrequency === 0) {
       const x = margin + (index / data.length) * graphWidth;
@@ -386,7 +372,7 @@ function bottlesOfHeineken(volumeMl) {
   // Calculate number of bottles
   let numBottles = volumeMl / 250;
 
-  // Format the result in layman's terms
+  // The most awesomest piece of code ever written
   if (numBottles < 0.1) {
     return "barely a sip";
   } else if (numBottles < 0.5) {
@@ -418,18 +404,17 @@ const btnAdd = document.getElementById("btnAdd");
 const btnClose = document.getElementById("btnClose");
 
 btnClose.addEventListener("click", () => {
-  installPopup.style.display = "none"; // Hide the popup
+  installPopup.style.display = "none";
 });
 
 window.addEventListener("beforeinstallprompt", (e) => {
-  // Prevent Chrome 67 and earlier from automatically showing the prompt
-
+  // Prevent from automatically showing the prompt
   e.preventDefault();
   deferredPrompt = e;
 
   // Check if we've already shown the prompt
   if (!localStorage.getItem("installPromptShown")) {
-    showInstallPrompt(); // Implement this function to update the UI
+    showInstallPrompt();
   }
 });
 
@@ -469,9 +454,6 @@ document.addEventListener("DOMContentLoaded", function () {
         // Hide the default install button
         installPopup.style.display = "none";
 
-        // Provide instructions for Safari users
-        // Check if we've already shown the prompt
-
         showSafariInstallInstructions();
       });
 
@@ -509,8 +491,8 @@ function showSafariInstallInstructions() {
 
   // Scroll the message into view smoothly
   message.scrollIntoView({
-    behavior: "smooth", // Animates the scroll
-    block: "start", // Aligns the message at the top of the view
-    inline: "nearest", // Centers it horizontally
+    behavior: "smooth",
+    block: "start",
+    inline: "nearest",
   });
 }
