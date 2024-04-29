@@ -69,18 +69,18 @@ async function startRecording(as) {
 
       shareOnWhatsApp.addEventListener("click", function () {
         let message =
-          "My longest continuous pee stream was " +
+          "Just splashed a " +
           longestDuration.toFixed(2) +
-          " seconds! Try it yourself at https://peezer.io.";
+          " seconds pee stream! 🚀 Can you top that? Check it out: https://peezer.io.";
         let whatsappUrl = "https://wa.me/?text=" + encodeURIComponent(message);
         window.open(whatsappUrl, "_blank");
       });
 
       shareOnTelegram.addEventListener("click", function () {
         let message =
-          "My longest continuous pee stream was " +
+          "Just splashed a " +
           longestDuration.toFixed(2) +
-          " seconds! Try it yourself at https://peezer.io.";
+          " seconds pee stream! 🚀 Can you top that? Check it out: https://peezer.io.";
         let telegramUrl =
           "https://t.me/share/url?url=https%3A//peezer.io&text=" +
           encodeURIComponent(message);
@@ -91,9 +91,9 @@ async function startRecording(as) {
         "href",
         "viber://forward?text=" +
           encodeURIComponent(
-            "My longest continuous pee stream was " +
+            "Just splashed a " +
               longestDuration.toFixed(2) +
-              " seconds! Try it yourself at https://peezer.io."
+              " seconds pee stream! 🚀 Can you top that? Check it out: https://peezer.io."
           )
       );
     });
